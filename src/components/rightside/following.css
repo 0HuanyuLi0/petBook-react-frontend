@@ -1,0 +1,28 @@
+.following ul{
+    list-style: none;
+    padding: 0 5px 0;
+}
+
+.following li{
+    display: inline-block;
+    margin: 0;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.following li:hover{
+    background-color: #ffc226;
+}
+
+.following li p{
+    margin: 0;
+}
+
+.following img{
+    display: block;
+    width: 60px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+}

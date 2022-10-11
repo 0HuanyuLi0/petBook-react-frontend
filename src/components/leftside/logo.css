@@ -1,0 +1,14 @@
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin:0 auto 30px;
+    text-align: center;
+    cursor: pointer;
+    /* background-color: #ffc226;
+    border-radius: 10px;
+    padding: 10px; */
+}

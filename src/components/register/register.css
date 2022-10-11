@@ -1,0 +1,46 @@
+.register {
+    width: 80%;
+    height: 70vh;
+    border: 1px solid #ffc226;
+    border-radius: 20px;
+    margin: 80px auto;
+    padding: 20px;
+    position: relative;
+}
+
+.register .long-img {
+    width: 100%;
+}
+
+
+.register form {
+    width: 100%;
+    padding-top: 50px;
+    text-align: center;
+}
+
+.register .text-field {
+   margin: 10px 20px;
+   width: 300px;
+   text-align: center;
+}
+
+
+.register .register-button {
+    display: block;
+    margin: 20px auto;
+    background-color: #ffc226;
+    color: black;
+    border-radius: 20px;
+}
+
+.register .register-button:hover {
+    background-color: #ffc226;
+    color: black;
+}
+
+.register .login-button{
+    position: absolute;
+    right: 20px;
+    text-transform: none;
+}
