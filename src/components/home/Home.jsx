@@ -22,7 +22,7 @@ function Home() {
 
       <div className="middle">
         <SearchBar />
-        <ShareBox />
+        <ShareBox commentMode = {false}/>
         <PostsContainer />
       </div>
 

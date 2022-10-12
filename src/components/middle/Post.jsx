@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import './post.css'
-
+import Comment from './Comment'
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -14,6 +17,10 @@ import axios from 'axios'
 const BASE_URL = 'http://localhost:3000/'
 
 function Post({ post }) {
+
+    const comments = useSelector(state => state.comments)
+
+    const dispatch = useDispatch();
 
     const user = JSON.parse(localStorage.getItem('user'));
     const token = "Bearer " + user.token
@@ -36,7 +43,7 @@ function Post({ post }) {
 
     const handleDelete = async () => {
         try {
-           
+
             const res = await axios.delete(BASE_URL + `post/${post._id}`, {
                 headers: {
                     'Authorization': token
@@ -44,7 +51,8 @@ function Post({ post }) {
             })
 
             handleClose()
-           
+
+            dispatch({ type: 'posts/deletePost', payload: res.data })
             console.log(res.data);
 
         } catch (err) {
@@ -58,7 +66,7 @@ function Post({ post }) {
 
     const submitLike = async () => {
         try {
-            
+
             const res = await axios.post(BASE_URL + `like/${post._id}`, {}, {
                 headers: {
                     'Authorization': token
@@ -81,6 +89,25 @@ function Post({ post }) {
         }
     }
 
+    const [openModal, setOpenModal] = useState(false);
+    const handleOpenModal = () => setOpenModal(true);
+    const handleCloseModal = () => setOpenModal(false);
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 800,
+        maxHeight: '90vh',
+        overflowY: 'scroll',
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        borderRadius: 10,
+        boxShadow: 24,
+        p: 4,
+    };
+
     return (
 
         <div className="post">
@@ -95,13 +122,22 @@ function Post({ post }) {
                     <em>
                         {format(post.createdAt)}
                     </em>
-                    <IconButton onClick={handleClick}>
-                        <MoreHorizIcon />
-                    </IconButton>
-                    <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-                        <MenuItem onClick={handleClose}>Edit</MenuItem>
-                        <MenuItem onClick={handleDelete}>Delete</MenuItem>
-                    </Menu>
+
+                    {
+                        (user.user._id === post.author._id) &&
+                        <>
+                            <IconButton onClick={handleClick}>
+                                <MoreHorizIcon />
+                            </IconButton>
+                            <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+                                <MenuItem onClick={handleClose}>Edit</MenuItem>
+                                <MenuItem onClick={handleDelete}>Delete</MenuItem>
+                            </Menu>
+                        </>
+                    }
+
+
+
                 </div>
 
                 <div className="content">
@@ -119,9 +155,18 @@ function Post({ post }) {
                         {likeNumb}
                     </div>
 
-                    <IconButton>
+                    <IconButton onClick={handleOpenModal}>
                         <ChatBubbleOutlineIcon />
                     </IconButton>
+
+                    <Modal
+                        open={openModal}
+                        onClose={handleCloseModal}
+                    >
+                        <Box sx={style}>
+                            <Comment post={post} />
+                        </Box>
+                    </Modal>
 
                     <div>
                         {post.comments.length}
