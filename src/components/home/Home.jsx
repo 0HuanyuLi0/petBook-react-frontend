@@ -10,6 +10,7 @@ import PostsContainer from '../middle/PostsContainer'
 import Followers from '../rightside/Followers'
 import { useLocation } from 'react-router-dom'
 import FriendsController from '../profile/FriendsController'
+import Message from '../rightside/Message'
 
 function Home() {
 
@@ -43,8 +44,8 @@ function Home() {
       </div>
 
       <div className="right-side">
-        <h3>Friends and Chat</h3>
         <Followers />
+        <Message />
       </div>
 
     </div>

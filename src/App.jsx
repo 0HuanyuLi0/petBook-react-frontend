@@ -10,7 +10,9 @@ import {
 import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
-import Profile from './components/profile/Profile';
+// import Profile from './components/profile/Profile';
+
+const user = JSON.parse(localStorage.getItem('user'));
 
 const router = createBrowserRouter([
   {
@@ -21,13 +23,13 @@ const router = createBrowserRouter([
     element:<Home />
   },{
     path:"/",
-    element:<Login />
+    element: <Login />
   },{
     path:"register",
     element:<Register />
   },{
-    path:"profile/:id",
-    element:<Profile />
+    // path:"profile/:id",
+    // element:<Profile />
   }
 ])
 

@@ -1,0 +1,71 @@
+.message{
+    width: 100%;
+    height: 45vh;
+    overflow-y: scroll;
+    border: 2px solid #ffc226 ;
+    border-radius: 10px;
+    margin-top: 3vh;
+    padding: 5px;
+    position: relative;
+}
+
+.message .message-block{
+    display: flex;
+    align-items:flex-start;
+}
+
+.message .message-block img{
+    display: block;
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.message .message-block p{
+    border-radius: 10px;
+    background-color: #1877f2;
+    color: white;
+    margin: 5px;
+    padding: 10px;
+}
+
+.message .message-block em{
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+
+.message .inputs{
+    border: 2px solid #1877f2;
+    position: fixed;
+    bottom: 40px;
+    padding: 10px;
+    border-radius: 10px;
+    
+}
+
+.message .inputs textarea{
+    font-size: 18px;
+    width: 15vw;
+    border: none;
+    resize: none;
+}
+
+.message .inputs textarea:focus{
+    outline: none;
+}
+
+.message .inputs button{
+    background-color: transparent;
+    border: none;
+    /* color: #1877f2; */
+    cursor: pointer;
+    float: right;
+}
+
+.message .inputs button:hover{
+    background-color: #1877f2;
+    color: white;
+    border-radius: 10px;
+}
