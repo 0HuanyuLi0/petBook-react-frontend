@@ -4,6 +4,8 @@
     box-sizing: border-box;
     /* border: 1px solid red */
     font-family: sans-serif !important;
+    /* background-color: gray; */
+    /* color: black; */
   }
   
   .Home{
@@ -16,8 +18,8 @@
     width: 20%;
     height: 100vh;
     padding: 20px 5px 0 0;
-    border-right: 1px solid #ffc226;
-    border-left: 1px solid #ffc226;
+    /* border-right: 1px solid #ffc226; */
+    /* border-left: 1px solid #ffc226; */
     position: relative;
   }
   
@@ -38,8 +40,8 @@
     width: 20%;
     height: 100vh;
     padding: 20px 0 0 5px;
-    border-left: 1px solid #ffc226;
-    border-right: 1px solid #ffc226;
+    /* border-left: 1px solid #ffc226; */
+    /* border-right: 1px solid #ffc226; */
   }
   
 svg{

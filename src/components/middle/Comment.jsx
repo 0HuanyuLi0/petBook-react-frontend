@@ -19,24 +19,7 @@ function Comment({ post }) {
     const user = JSON.parse(localStorage.getItem('user'));
     const token = "Bearer " + user.token
 
-    // const handleDelete = async () => {
-    //     try {
-
-    //         const res = await axios.delete(BASE_URL + `post/${post._id}`, {
-    //             headers: {
-    //                 'Authorization': token
-    //             }
-    //         })
-
-    //         handleClose()
-
-    //         dispatch({ type: 'posts/deletePost', payload: res.data })
-    //         console.log(res.data);
-
-    //     } catch (err) {
-    //         console.error('Error delete the post', err);
-    //     }
-    // }
+    
 
     const [anchorEl, setAnchorEl] = useState(null)
     const [open, setOpen] = useState(false)
@@ -47,10 +30,7 @@ function Comment({ post }) {
         setOpen(false)
     }
 
-    // const handleClick = (elem) => (event) => {
-    //     setAnchorEl(event.currentTarget);
-    //     setOpenElem(elem);
-    // };
+ 
 
     const handleClick = (e,id) => {
         // console.log('anchor:',e.currentTarget,id);
@@ -133,7 +113,6 @@ function Comment({ post }) {
 
                                 <strong>
                                     {c.author.name}
-                                    {c._id}
                                 </strong>
                                 <em>
                                     {format(c.createdAt)}

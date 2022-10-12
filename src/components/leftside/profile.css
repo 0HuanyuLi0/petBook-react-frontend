@@ -6,6 +6,7 @@
 
 .profile img {
     width: 80%;
+    max-width: 200px;
     aspect-ratio: 1;
     /* height: 80%; */
     border-radius: 100%;

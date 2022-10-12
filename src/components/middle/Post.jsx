@@ -9,6 +9,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import {useNavigate} from 'react-router-dom'
 
 import { format } from 'timeago.js'
 import { Menu, MenuItem } from "@mui/material"
@@ -17,7 +18,7 @@ import axios from 'axios'
 const BASE_URL = 'http://localhost:3000/'
 
 function Post({ post }) {
-
+    const push = useNavigate()
     const comments = useSelector(state => state.comments)
 
     const dispatch = useDispatch();
@@ -111,7 +112,7 @@ function Post({ post }) {
     return (
 
         <div className="post">
-            <img className='avatar' src={post.author.profilePicture} alt="" />
+            <img className='avatar' src={post.author.profilePicture} alt="" onClick={()=>push(`/profile/${post.author._id}`)}/>
 
             <div className='post-container'>
                 <div className="title">

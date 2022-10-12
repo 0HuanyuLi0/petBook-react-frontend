@@ -3,16 +3,21 @@ import './shareBox.css'
 import PetsIcon from '@mui/icons-material/Pets';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios'
+import CloudinaryUploadWidget from '../CloudinaryUploadWidget';
+
 const BASE_URL = 'http://localhost:3000/'
 
-function ShareBox({commentMode}) {
+function ShareBox({ commentMode }) {
     // console.log('Mode:',commentMode);
-  
-    
+
+    // let uploadUrl = null
+
+
     const user = JSON.parse(localStorage.getItem('user'));
     const token = "Bearer " + user.token
     const [message, setMessage] = useState('')
-    const [result, setResult] = useState(null)
+    const [uploadUrl, setUploadUrl] = useState(null)
+
 
     const posts = useSelector(state => state.posts)
     const comments = useSelector(state => state.comments)
@@ -30,12 +35,13 @@ function ShareBox({commentMode}) {
         }
         commentMode ? submitComment() : submitPost()
         setMessage('')
+        setUploadUrl(null)
     }
 
     const submitPost = async () => {
         try {
             const res = await axios.post(BASE_URL + 'posts',
-                { message },
+                { message, img_url: uploadUrl },
                 {
                     headers: {
                         'Authorization': token
@@ -44,7 +50,7 @@ function ShareBox({commentMode}) {
             )
             console.log(res.data);
             dispatch({ type: 'posts/addNewPost', payload: res.data })
-             
+
 
         } catch (err) {
             console.error('Error sumbit post:', err);
@@ -54,14 +60,14 @@ function ShareBox({commentMode}) {
     const submitComment = async () => {
         try {
             const res = await axios.post(BASE_URL + 'comments',
-                { message, postId:commentMode },
+                { message, postId: commentMode, img_url: uploadUrl },
                 {
                     headers: {
                         'Authorization': token
                     }
                 }
             )
-            console.log('new comment:',res.data);
+            console.log('new comment:', res.data);
             dispatch({ type: 'comments/addNewComment', payload: res.data })
 
 
@@ -70,26 +76,44 @@ function ShareBox({commentMode}) {
         }
     }
 
-    const conditionRender = () => commentMode ? 
-    {
-        ph:"What do you think?",
-        btn:"Comment"
-    }
-    :
-    {
-        ph:"What's happening of your pet?",
-        btn:"Share"
+    const conditionRender = () => commentMode ?
+        {
+            ph: "What do you think?",
+            btn: "Comment"
+        }
+        :
+        {
+            ph: "What's happening of your pet?",
+            btn: "Share"
+        }
+
+    const handleUrl = (u) => {
+        setUploadUrl(u)
+        // console.log('C: ',u);
     }
 
     return (
+
         <div className='sharebox'>
+
 
             <img src={user.user.profilePicture} alt={user.user.name} />
 
-            <form onSubmit={handleSumbit}>
-                <input type="text" placeholder={conditionRender().ph} onChange={handleMessage} value={message}/>
-                <button type="submit"><PetsIcon /> {conditionRender().btn} <PetsIcon /> </button>
-            </form>
+            <div>
+
+                <input type="text" placeholder={conditionRender().ph} onChange={handleMessage} value={message} />
+                {
+                !uploadUrl && !commentMode &&
+                <CloudinaryUploadWidget url={(u) => handleUrl(u)} />
+                }
+                <button className='btn' onClick={handleSumbit}><PetsIcon /> {conditionRender().btn} <PetsIcon /> </button>
+                {
+                    uploadUrl &&
+                    <img className='preview' src={uploadUrl} alt={uploadUrl} />
+                }
+            </div>
+
+
 
         </div>
     )

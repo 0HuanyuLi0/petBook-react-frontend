@@ -20,11 +20,12 @@ function NavLinks() {
     const token = "Bearer " + user.token
 
     const homePath = `/home/${user.user._id}`
+    const profilePath = `/profile/${user.user._id}`
 
     
     const logout = () => {
         localStorage.removeItem("user")
-        push('/login')
+        push('/')
     }
 
     const deleteAccount = async() => {
@@ -41,15 +42,15 @@ function NavLinks() {
     return (
         <div className="nav-links">
            
-                <Button size="large" startIcon={<HomeIcon />} href={homePath} style={{justifyContent: "flex-start"}}>
+                <Button size="large" startIcon={<HomeIcon />} onClick={()=>{push(homePath)}}  style={{justifyContent: "flex-start"}}>
                     <span>Home</span> 
                 </Button>
 
-                <Button size="large" startIcon={<NotificationsIcon />} href="#" style={{justifyContent: "flex-start"}}>
+                <Button size="large" startIcon={<NotificationsIcon />}  style={{justifyContent: "flex-start"}}>
                     Notification
                 </Button>
 
-                <Button size="large" startIcon={<FeedIcon />} href="#" style={{justifyContent: "flex-start"}}>
+                <Button size="large" startIcon={<FeedIcon />} onClick={()=>{push(profilePath)}} style={{justifyContent: "flex-start"}}>
                     Feeds
                 </Button>
 
@@ -58,7 +59,7 @@ function NavLinks() {
                 </Button>
 
                 <Button size="large" className='deteleBtn' startIcon={<DeleteForeverIcon />} onClick={deleteAccount} style={{justifyContent: "flex-start"}}>
-                    Delete Account
+                    Delete
                 </Button>
 
         </div>
