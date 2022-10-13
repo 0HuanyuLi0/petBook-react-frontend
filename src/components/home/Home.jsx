@@ -10,46 +10,58 @@ import PostsContainer from '../middle/PostsContainer'
 import Followers from '../rightside/Followers'
 import { useLocation } from 'react-router-dom'
 import FriendsController from '../profile/FriendsController'
-import Message from '../rightside/Message'
+import Messager from '../messager/MessagerContainer'
+
 
 function Home() {
 
     const user = JSON.parse(localStorage.getItem('user'));
     const token = "Bearer " + user.token
-   
+
     const location = useLocation().pathname.split('/').filter(element => element)
 
-  return (
-    <div className="Home">
+    return (
+        <div className="Home">
 
-      <div className="left-side">
-        <Logo />
-        <Profile userId = {user.user._id}/>
-        <NavLinks />
-      </div>
+            <div className="left-side">
+                <Logo />
+                <Profile userId={user.user._id} />
+                <NavLinks />
+            </div>
 
-      <div className="middle">
-        <SearchBar />
-        {
-            location[0] === 'profile' && 
-            <Profile userId = {location[1]}/>
-        }
-        {
-            location[1] === user.user._id ? 
-            <ShareBox commentMode = {false}/>
-            :
-            <FriendsController userId = {location[1]}/>
-        } 
-        <PostsContainer />
-      </div>
+            <div className="middle">
+                {
+                    location[0] === 'messager' &&
+                    <Messager />
+                }
 
-      <div className="right-side">
-        <Followers />
-        <Message />
-      </div>
+                {
+                    location[0] !== 'messager' &&
+                    <>
+                        <SearchBar />
+                        {
+                            location[0] === 'profile' &&
+                            <Profile userId={location[1]} />
+                        }
+                        {
+                            location[1] === user.user._id ?
+                                <ShareBox commentMode={false} />
+                                :
+                                <FriendsController userId={location[1]} />
+                        }
+                        <PostsContainer />
+                    </>
+                }
 
-    </div>
-  )
+
+            </div>
+
+            <div className="right-side">
+                <Followers />
+            </div>
+
+        </div>
+    )
 }
 
 export default Home

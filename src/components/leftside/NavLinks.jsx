@@ -7,6 +7,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import FeedIcon from '@mui/icons-material/Feed';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ChatIcon from '@mui/icons-material/Chat';
 import { useNavigate } from 'react-router-dom'
 import './navlinks.css'
 
@@ -21,6 +22,7 @@ function NavLinks() {
 
     const homePath = `/home/${user.user._id}`
     const profilePath = `/profile/${user.user._id}`
+    const messagerPath = `/messager/${user.user._id}`
 
     
     const logout = () => {
@@ -52,6 +54,10 @@ function NavLinks() {
 
                 <Button size="large" startIcon={<FeedIcon />} onClick={()=>{push(profilePath)}} style={{justifyContent: "flex-start"}}>
                     Feeds
+                </Button>
+
+                <Button size="large" startIcon={<ChatIcon />} onClick={()=>{push(messagerPath)}} style={{justifyContent: "flex-start"}}>
+                    Messager
                 </Button>
 
                 <Button size="large" className='logoutBtn' startIcon={<LogoutIcon />} onClick={logout} style={{justifyContent: "flex-start"}}>
