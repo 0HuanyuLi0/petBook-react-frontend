@@ -11,7 +11,7 @@ import { useLocation } from 'react-router-dom'
 const BASE_URL = 'http://localhost:3000/'
 
 function PostsContainer() {
-
+    const user = JSON.parse(localStorage.getItem('user'));
     const location = useLocation().pathname.split('/').filter(element => element)
 
     // console.log('profile path', location);
@@ -42,7 +42,7 @@ function PostsContainer() {
 
 
     return (
-        posts
+        posts && user
         &&
         <div className='postsContainer'>
             {

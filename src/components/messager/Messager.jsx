@@ -10,7 +10,7 @@ const BASE_URL = 'http://localhost:3000/'
 function Message() {
     const user = JSON.parse(localStorage.getItem('user'));
     const token = "Bearer " + user?.token
-    const [newMessage, setNewMessage] = useState(null)
+    const [newMessage, setNewMessage] = useState('')
     const [messages, setMessages] = useState(null)
 
     const socket = io(BASE_URL)
@@ -24,7 +24,7 @@ function Message() {
 
     useEffect(() => {
         socket.emit('addUser', user.user._id)
-        console.log('addUser',user.user._id);
+        console.log('addUser', user.user._id);
         return () => {
             // socket.off('connect')
             // socket.emit('goTodisconnect');
@@ -58,7 +58,7 @@ function Message() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if(newMessage.length < 1){
+        if (newMessage.length < 1) {
             return
         }
         try {
@@ -84,27 +84,33 @@ function Message() {
 
     }
 
-   
-       
-   
+
+
+
 
     return (
 
         <>
-            {messages &&
+            {user.user._id && messages &&
                 <div className="message">
 
                     {
-                        messages.map(m => <div key={m._id} className={user.user._id === m.sender._id ? 'message-block own' : 'message-block'}>
-                            <img src={m.sender.profilePicture} alt={m.sender.name} />
+                        messages.map(m =>
+                            // console.log('m:====',m))
+                            // <div key={m._id} className='message-block own'>
 
-                            <div className='textContainer'>
-                                <p>{m.message}</p>
-                                <em>{format(m.createdAt)}</em>
-                            </div>
-                        </div>)
+                            <div key={m._id} className={user.user._id === m.sender?._id ? 'message-block own' : 'message-block'}>
+
+                                <img src={m.sender?.profilePicture} alt={m.sender?.name} />
+
+                                <div className='textContainer'>
+                                    <p>{m.message}</p>
+                                    <em>{format(m.createdAt)}</em>
+                                </div>
+                            </div>)
+
                     }
-                    
+
                 </div>}
 
 
@@ -113,12 +119,6 @@ function Message() {
                 <button type='submit'><SendIcon /></button>
             </form>
         </>
-
-
-
-
-
-
 
 
     )
