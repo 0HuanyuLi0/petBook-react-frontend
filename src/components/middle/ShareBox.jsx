@@ -4,20 +4,14 @@ import PetsIcon from '@mui/icons-material/Pets';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios'
 import CloudinaryUploadWidget from '../CloudinaryUploadWidget';
-
-
+import socket from '../../socket'
+import BASE_URL from '../../baseUrl'
 
 function ShareBox({ commentMode }) {
     // console.log('Mode:',commentMode);
 
     // let uploadUrl = null
-    let BASE_URL;
-    if( process.env.NODE_ENV === 'development'){
-        BASE_URL = 'http://localhost:3000/';
-    } else {
-        BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
-    }
-
+  
     const user = JSON.parse(localStorage.getItem('user'));
     const token = "Bearer " + user.token
     const [message, setMessage] = useState('')
@@ -53,9 +47,9 @@ function ShareBox({ commentMode }) {
                     }
                 }
             )
-            console.log(res.data);
+            // console.log(res.data);
             dispatch({ type: 'posts/addNewPost', payload: res.data })
-
+            socket.emit('addPosts','addPosts')
 
         } catch (err) {
             console.error('Error sumbit post:', err);
@@ -72,9 +66,9 @@ function ShareBox({ commentMode }) {
                     }
                 }
             )
-            console.log('new comment:', res.data);
+            // console.log('new comment:', res.data);
             dispatch({ type: 'comments/addNewComment', payload: res.data })
-
+            socket.emit('addComments','addComments')
 
         } catch (err) {
             console.error('Error sumbit post:', err);

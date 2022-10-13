@@ -15,14 +15,12 @@ import { format } from 'timeago.js'
 import { Menu, MenuItem } from "@mui/material"
 
 import axios from 'axios'
-let BASE_URL;
-if( process.env.NODE_ENV === 'development'){
-    BASE_URL = 'http://localhost:3000/';
-} else {
-    BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
-}
+import socket from '../../socket'
+import BASE_URL from '../../baseUrl'
+
 
 function Post({ post }) {
+  
     const push = useNavigate()
     const comments = useSelector(state => state.comments)
 
@@ -59,8 +57,8 @@ function Post({ post }) {
             handleClose()
 
             dispatch({ type: 'posts/deletePost', payload: res.data })
-            console.log(res.data);
-
+            // console.log(res.data);
+            socket.emit('addPosts','addPosts')
         } catch (err) {
             console.error('Error delete the post', err);
         }
@@ -68,6 +66,7 @@ function Post({ post }) {
 
     const handleLike = (e) => {
         submitLike()
+        socket.emit('addPosts','addPosts')
     }
 
     const submitLike = async () => {
@@ -80,7 +79,7 @@ function Post({ post }) {
             })
             setLike(res.data.liked)
             setLikeNumb(res.data.number)
-            console.log(res.data);
+            // console.log(res.data);
 
         } catch (err) {
             console.error('Error submit like', err);

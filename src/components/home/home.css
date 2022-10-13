@@ -1,54 +1,53 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400&display=swap'); */
 
-*{
-    box-sizing: border-box;
-    /* border: 1px solid red */
-    font-family: sans-serif !important;
-    /* background-color: gray; */
-    /* color: black; */
-  }
-
-  body{
-    overflow-y: hidden;
-  }
-  
-  .Home{
-    width: 90%;
-    margin: 0 auto;
-    display: flex;
-  }
-  
-  .left-side{
-    width: 20%;
-    height: 100vh;
-    padding: 20px 5px 0 0;
-    /* border-right: 1px solid #ffc226; */
-    /* border-left: 1px solid #ffc226; */
-    position: relative;
-  }
-  
-  .middle{
-    width: 60%;
-    
-    height: 100vh;
-    padding: 20px 20px 0;
-    overflow-y: scroll;
-    /* margin-bottom: 10px; */
-  }
-  
-  ::-webkit-scrollbar{
-    width: 0px;
-  }
-  
-  .right-side{
-    width: 20%;
-    height: 100vh;
-    padding: 20px 0 0 5px;
-    /* border-left: 1px solid #ffc226; */
-    /* border-right: 1px solid #ffc226; */
-  }
-  
-svg{
-    vertical-align: middle;
+* {
+  box-sizing: border-box;
+  /* border: 1px solid red */
+  font-family: sans-serif !important;
+  /* background-color: gray; */
+  /* color: black; */
 }
-  
+
+body {
+  overflow-y: hidden;
+}
+
+.Home {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.left-side {
+  width: 20%;
+  height: 100vh;
+  padding: 20px 5px 0 0;
+  /* border-right: 1px solid #ffc226; */
+  /* border-left: 1px solid #ffc226; */
+  position: relative;
+}
+
+.middle {
+  width: 60%;
+
+  height: 100vh;
+  padding: 20px 20px 0;
+  overflow-y: scroll;
+  /* margin-bottom: 10px; */
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+.right-side {
+  width: 20%;
+  height: 100vh;
+  padding: 20px 0 0 5px;
+  /* border-left: 1px solid #ffc226; */
+  /* border-right: 1px solid #ffc226; */
+}
+
+svg {
+  vertical-align: middle;
+}

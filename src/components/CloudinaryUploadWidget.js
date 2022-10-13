@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-
+// require('dotenv').config()
 class CloudinaryUploadWidget extends Component {
 
   componentDidMount() {

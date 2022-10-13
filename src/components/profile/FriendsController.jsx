@@ -5,19 +5,15 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { pink } from '@mui/material/colors';
 import './friendsController.css'
 import { useSelector, useDispatch } from 'react-redux';
-import { io } from 'socket.io-client'
+import socket from '../../socket'
+import BASE_URL from '../../baseUrl'
 
 import axios from 'axios'
 
 
 function FriendsController({ userId }) {
-    let BASE_URL;
-if( process.env.NODE_ENV === 'development'){
-    BASE_URL = 'http://localhost:3000/';
-} else {
-    BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
-}
-let socket = io(BASE_URL)
+
+
     const friends = useSelector(state => state.friends)
     const dispatch = useDispatch();
 

@@ -5,7 +5,7 @@
     border-radius: 20px;
     margin: 80px auto;
     padding: 20px;
-    position: relative;
+    /* position: relative; */
 }
 
 .login .long-img {
@@ -46,7 +46,9 @@
 }
 
 .login .register-button{
-    position: absolute;
-    right: 20px;
+    /* position: absolute;
+    right: 20px; */
     text-transform: none;
+    float: right;
+    /* margin-top: -20px; */
 }

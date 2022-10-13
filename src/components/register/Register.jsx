@@ -4,18 +4,14 @@ import './register.css'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import PetsIcon from '@mui/icons-material/Pets';
-
+import socket from '../../socket'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+import BASE_URL from '../../baseUrl'
 
 function Register() {
-    let BASE_URL;
-if( process.env.NODE_ENV === 'development'){
-    BASE_URL = 'http://localhost:3000/';
-} else {
-    BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
-}
+    
     const [result,setResult] = useState(null)
     const [email,setEmail] = useState(null)
     const [password,setPassword] = useState(null)
@@ -36,7 +32,7 @@ if( process.env.NODE_ENV === 'development'){
 
     const handleSumbit = (e) => {
         e.preventDefault()
-        console.log(email,password);
+        // console.log(email,password);
         register()
         
     }
@@ -56,7 +52,8 @@ if( process.env.NODE_ENV === 'development'){
                 push(`/home/${res.data.user._id}`)
             }
 
-            console.log(res.data);
+            socket.emit('addNewUser','addNewUser')
+            // console.log(res.data);
 
         }catch(err){
             console.error('Error login:',err);
@@ -74,7 +71,7 @@ if( process.env.NODE_ENV === 'development'){
             <form onSubmit={handleSumbit}>
                 <TextField
                     required
-                    id="outlined-required"
+                    
                     label="Email"
                     type="email"
                     className='text-field'
@@ -86,7 +83,7 @@ if( process.env.NODE_ENV === 'development'){
 
                 <TextField
                     required
-                    id="outlined-required"
+                    
                     label="Password"
                     type="password"
                     className='text-field'
@@ -98,7 +95,7 @@ if( process.env.NODE_ENV === 'development'){
 
                 <TextField
                     required
-                    id="outlined-required"
+                    
                     label="Name"
                     type="text"
                     className='text-field'

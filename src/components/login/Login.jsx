@@ -8,15 +8,9 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 
-let BASE_URL;
-if( process.env.NODE_ENV === 'development'){
-    BASE_URL = 'http://localhost:3000/';
-} else {
-    BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
-}
+import BASE_URL from '../../baseUrl'
 
-// const BASE_URL = 'http://localhost:3000/'
-// https://petbook-server-huanyuli.herokuapp.com/
+
 
 function Login() {
 
@@ -36,7 +30,7 @@ function Login() {
 
     const handleSumbit = (e) => {
         e.preventDefault()
-        console.log(email,password);
+        // console.log(email,password);
         loginTo()
         
     }
@@ -55,7 +49,7 @@ function Login() {
                 push(`/home/${res.data.user._id}`)
             }
 
-            console.log(res.data);
+            // console.log(res.data);
 
         }catch(err){
             console.error('Error login:',err);
@@ -76,7 +70,7 @@ function Login() {
             <form onSubmit={handleSumbit}>
                 <TextField
                     required
-                    id="outlined-required"
+                    
                     label="Email"
                     type="email"
                     className='text-field'
@@ -85,7 +79,7 @@ function Login() {
 
                 <TextField
                     required
-                    id="outlined-required"
+                    
                     label="Password"
                     type="password"
                     className='text-field'

@@ -3,17 +3,12 @@ import './following.css'
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-import { io } from 'socket.io-client'
 
+import socket from '../../socket'
+import BASE_URL from '../../baseUrl'
 
 function Followers() {
-    let BASE_URL;
-    if( process.env.NODE_ENV === 'development'){
-        BASE_URL = 'http://localhost:3000/';
-    } else {
-        BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
-    }
-    let socket = io(BASE_URL)
+   
     const friends = useSelector(state => state.friends)
     const dispatch = useDispatch();
 
@@ -23,6 +18,8 @@ function Followers() {
 
     const [following, setFollowing] = useState(null)
     const [followers, setFollowers] = useState(null)
+    const [users,setUsers] = useState(null)
+    
 
     const getFriends = async () => {
         try {
@@ -43,20 +40,43 @@ function Followers() {
 
     }
 
+    const getAllUsers = async()=>{
+        try{
+            const res = await axios.get(BASE_URL + `users`)
+            setUsers(res.data)
+
+        }catch(err){
+            console.error('Error get all users',err);
+        }
+    }
+
     useEffect(() => {
         getFriends()
     }, [friends])
 
     useEffect(()=>{
+        getAllUsers()
+    },[users])
+
+    useEffect(()=>{
         socket.on("getFriends",()=>{
             getFriends()
+        })
+        return () => {
+            // socket = null
+        }
+    },[])
+
+    useEffect(()=>{
+        socket.on("getAllUsers",()=>{
+            getAllUsers()
         })
     },[])
 
 
 
     return (
-        following && followers &&
+        following && followers && users &&
         <div className='following'>
             <h3>You're following ...</h3>
             <ul>
@@ -81,6 +101,19 @@ function Followers() {
                     )
                 }
             </ul>
+
+            <h3>All Users</h3>
+            <ul>
+                {
+                    users.map(f =>
+                        <li key={f._id} onClick={()=>push(`/profile/${f._id}`)}>
+                            <img src={f.profilePicture} alt={f.profilePicture} />
+                            <p>{f.name}</p>
+                        </li>
+                    )
+                }
+            </ul>
+
         </div>
     )
 }

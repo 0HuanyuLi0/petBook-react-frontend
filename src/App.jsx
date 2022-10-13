@@ -9,7 +9,7 @@ import React from 'react'
 //   Link,
 // } from "react-router-dom";
 
-import {HashRouter as Router, Link, Route, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
 
 import Home from './components/home/Home';
 import Login from './components/login/Login';
@@ -46,15 +46,14 @@ function App() {
   return (
     // <RouterProvider router={router} />
     <>
-    {/* <Login /> */}
     <Router>
       <Routes>
-        <Route exact path="/" element={<Login />}></Route>
-        <Route path="/home/:id" element={<Home />}></Route>
-        <Route path="/profile/:id" element={<Home />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-        <Route path="/messager/:id" element={<Home />}></Route>
-        <Route path="/login" element={<Login />}></Route>
+        <Route path="/" element={<Login />} />
+        <Route path="/home/:id" element={<Home />} />
+        <Route path="/profile/:id" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/messager/:id" element={<Home />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
     </>

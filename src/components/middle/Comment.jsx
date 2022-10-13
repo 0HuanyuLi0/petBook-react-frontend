@@ -8,12 +8,9 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import IconButton from '@mui/material/IconButton';
 import { Menu, MenuItem } from "@mui/material"
 
-let BASE_URL;
-if( process.env.NODE_ENV === 'development'){
-    BASE_URL = 'http://localhost:3000/';
-} else {
-    BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
-}
+
+import socket from '../../socket'
+import BASE_URL from '../../baseUrl'
 
 
 function Comment({ post }) {
@@ -23,7 +20,6 @@ function Comment({ post }) {
 
     const user = JSON.parse(localStorage.getItem('user'));
     const token = "Bearer " + user.token
-
     
 
     const [anchorEl, setAnchorEl] = useState(null)
@@ -58,30 +54,37 @@ function Comment({ post }) {
             handleClose()
 
             dispatch({ type: 'comments/deleteComment', payload: res.data })
-            console.log(res.data);
+            // console.log(res.data);
 
         } catch (err) {
             console.error('Error delete the post', err);
         }
     }
 
+    const getComments = async () => {
+        try {
+            const res = await axios.get(BASE_URL + `post/${post._id}/comments`)
+            // console.log('get comments', res.data);
+
+            dispatch({ type: 'comments/getComments', payload: res.data.reverse() })
+
+        } catch (err) {
+            console.error('Error get comments', err);
+        }
+    }
 
     useEffect(() => {
-        console.log('comments', comments);
-        const getComments = async () => {
-            try {
-                const res = await axios.get(BASE_URL + `post/${post._id}/comments`)
-                console.log('get comments', res.data);
-
-                dispatch({ type: 'comments/getComments', payload: res.data.reverse() })
-
-            } catch (err) {
-                console.error('Error get comments', err);
-            }
-        }
         getComments()
     }, [comments && comments.length])
 
+    useEffect(()=>{
+        socket.on("getComments",()=>{
+            getComments()
+        })
+        return () => {
+            // socket = null
+        }
+    },[])
 
     return (
         comments

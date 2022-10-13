@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Button from '@mui/material/Button';
-import PetsIcon from '@mui/icons-material/Pets';
+// import PetsIcon from '@mui/icons-material/Pets';
 import HomeIcon from '@mui/icons-material/Home';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -11,13 +11,9 @@ import ChatIcon from '@mui/icons-material/Chat';
 import { useNavigate } from 'react-router-dom'
 import './navlinks.css'
 
+import BASE_URL from '../../baseUrl'
+
 import axios from 'axios'
-let BASE_URL;
-if( process.env.NODE_ENV === 'development'){
-    BASE_URL = 'http://localhost:3000/';
-} else {
-    BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
-}
 
 
 function NavLinks() {
@@ -42,7 +38,7 @@ function NavLinks() {
             }
         })
         localStorage.removeItem("user")
-        console.log(res.data);
+        // console.log(res.data);
         push('/login')
     }
 
