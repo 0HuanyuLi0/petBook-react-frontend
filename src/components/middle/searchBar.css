@@ -8,10 +8,14 @@
     margin-bottom: 20px;
 }
 
+.search-bar form{
+    width: 100%;
+}
 .search-bar input{
     width: 100%;
     border: none;
     font-size: 16px;
+    /* background-color: #ffc226; */
 }
 
 .search-bar input:focus{
@@ -21,4 +25,42 @@
 .search-bar .search-icon{
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.user{
+    display: inline-block;
+    margin: 0;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    
+}
+
+.user:hover{
+    background-color: #ffc226;
+}
+
+.user img{
+    display: block;
+    width: 60px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    text-align: center;
+    margin: 5px auto;
+}
+
+.user p{
+    margin: 0;
+}
+
+.noR{
+    display: block;
+    color: red;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.messageS{
+
 }

@@ -23,12 +23,12 @@ function FriendsController({ userId }) {
         try {
             const res = await axios.post(BASE_URL + `follow/${userId}`,
                 {
-                    currentUserId : user.user._id
+                    currentUserId: user.user._id
                 })
 
-            dispatch({ type: 'friends/addNewFriends'})
-socket.emit('addFriends','addFriends')
-            // console.log('add friend:', res.data);
+            dispatch({ type: 'friends/addNewFriends' })
+            socket.emit('addFriends', 'addFriends')
+            console.log('add friend:', res.data);
 
         } catch (err) {
             console.error(err);
@@ -41,11 +41,11 @@ socket.emit('addFriends','addFriends')
         try {
             const res = await axios.post(BASE_URL + `unfollow/${userId}`,
                 {
-                    currentUserId : user.user._id
+                    currentUserId: user.user._id
                 })
-                dispatch({ type: 'friends/deleteFriends'})
-            // console.log('remove friend:', res.data);
-            socket.emit('addFriends','addFriends')
+            dispatch({ type: 'friends/deleteFriends' })
+            console.log('remove friend:', res.data);
+            socket.emit('addFriends', 'addFriends')
         } catch (err) {
             console.error(err);
         }
@@ -65,7 +65,7 @@ socket.emit('addFriends','addFriends')
         </div>
 
 
-    )
+    )    
 }
 
 export default FriendsController
