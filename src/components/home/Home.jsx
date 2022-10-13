@@ -31,8 +31,8 @@ function Home() {
 
             <div className="middle">
                 {
-                    location[0] === 'messager' &&
-                    <Messager />
+                    // location[0] === 'messager' &&
+                    // <Messager />
                 }
 
                 {
