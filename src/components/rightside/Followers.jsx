@@ -40,38 +40,44 @@ function Followers() {
 
     }
 
-    const getAllUsers = async()=>{
+    const getAllUsers = async(d)=>{
+        // console.log('===online',d);
+
         try{
             const res = await axios.get(BASE_URL + `users`)
             setUsers(res.data)
 
         }catch(err){
-            console.error('Error get all users',err);
+            console.error('Error get online users',err);
         }
     }
+
+    useEffect(() => {
+        
+        socket.emit('addUser', user.user._id)
+        // console.log('addUser', user.user._id);
+    }, [user?.user._id])
 
     useEffect(() => {
         getFriends()
     }, [friends])
 
-    useEffect(()=>{
-        getAllUsers()
-    },[users])
+
 
     useEffect(()=>{
         socket.on("getFriends",()=>{
             getFriends()
         })
-        return () => {
-            // socket = null
-        }
+        
     },[])
 
     useEffect(()=>{
-        socket.on("getAllUsers",()=>{
-            getAllUsers()
+        socket.on("getUsers",(data)=>{
+            getAllUsers(data)
         })
+        
     },[])
+
 
 
 
@@ -102,11 +108,13 @@ function Followers() {
                 }
             </ul>
 
-            <h3>All Users</h3>
+            <h3>All Online Users</h3>
             <ul>
                 {
                     users.map(f =>
+                        user.user._id !== f._id &&
                         <li key={f._id} onClick={()=>push(`/profile/${f._id}`)}>
+                            <span className='online'></span>
                             <img src={f.profilePicture} alt={f.profilePicture} />
                             <p>{f.name}</p>
                         </li>

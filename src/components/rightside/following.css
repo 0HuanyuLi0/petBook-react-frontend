@@ -1,6 +1,7 @@
 .following ul{
     list-style: none;
     padding: 0 5px 0;
+    margin: 0;
 }
 
 .following li{
@@ -10,14 +11,24 @@
     text-align: center;
     cursor: pointer;
     border-radius: 10px;
+    align-items: center;
+    width: 70px;
+    /* height: 100px; */
 }
 
 .following li:hover{
     background-color: #ffc226;
 }
 
+
 .following li p{
     margin: 0;
+    padding: 0;
+    width: 60px;
+    height: 18px;
+    white-space: nowrap;
+    overflow:hidden;
+    margin: 0 auto;
 }
 
 .following img{
@@ -25,4 +36,17 @@
     width: 60px;
     aspect-ratio: 1;
     border-radius: 50%;
+    margin: 0 auto;
+}
+
+.following .online{
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-color: green;
+    border-radius: 50%;
+    position: relative;
+    top:15px;
+    left: 10px;
+    margin: 0;
 }

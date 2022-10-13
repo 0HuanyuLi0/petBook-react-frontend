@@ -7,19 +7,21 @@ import PetsIcon from '@mui/icons-material/Pets';
 import socket from '../../socket'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import CloudinaryUploadWidget from '../CloudinaryUploadWidget';
 
 import BASE_URL from '../../baseUrl'
 
 function Register() {
-    
-    const [result,setResult] = useState(null)
-    const [email,setEmail] = useState(null)
-    const [password,setPassword] = useState(null)
-    const [userName,setUserName] = useState(null)
+
+    const [result, setResult] = useState(null)
+    const [email, setEmail] = useState(null)
+    const [password, setPassword] = useState(null)
+    const [userName, setUserName] = useState(null)
+    const [uploadUrl, setUploadUrl] = useState(null)
 
     const push = useNavigate()
 
-    const handleEmail = (e) =>{
+    const handleEmail = (e) => {
         setEmail(e.target.value)
     }
 
@@ -34,15 +36,16 @@ function Register() {
         e.preventDefault()
         // console.log(email,password);
         register()
-        
+
     }
 
-    const register = async() => {
-        try{
-            const res = await axios.post(BASE_URL + 'users' , {
-                name:userName,
+    const register = async () => {
+        try {
+            const res = await axios.post(BASE_URL + 'users', {
+                name: userName,
                 email,
-                password
+                password,
+                uploadUrl
             })
 
             setResult(res.data)
@@ -52,11 +55,11 @@ function Register() {
                 push(`/home/${res.data.user._id}`)
             }
 
-            socket.emit('addNewUser','addNewUser')
+            socket.emit('addNewUser', 'addNewUser')
             // console.log(res.data);
 
-        }catch(err){
-            console.error('Error login:',err);
+        } catch (err) {
+            console.error('Error login:', err);
         }
     }
 
@@ -68,45 +71,67 @@ function Register() {
             <img src="https://www.fetchpetcare.com/wp-content/uploads/2016/11/dreamstime_xxl_87694876-1024x293.jpg" alt="" className='long-img' />
 
 
-            <form onSubmit={handleSumbit}>
+            <div className='form'>
                 <TextField
                     required
-                    
+
                     label="Email"
                     type="email"
                     className='text-field'
                     inputProps={{
                         minLength: 3,
-                      }}
+                    }}
                     onChange={handleEmail}
                 />
 
                 <TextField
                     required
-                    
+
                     label="Password"
                     type="password"
                     className='text-field'
                     inputProps={{
                         minLength: 6,
-                      }}
-                      onChange={handlePassword}
+                    }}
+                    onChange={handlePassword}
                 />
 
                 <TextField
                     required
-                    
+
                     label="Name"
                     type="text"
                     className='text-field'
                     onChange={handleUserName}
                 />
 
-                <div className="btn">
-                    <Button variant="contained" className='register-button' type='submit'><PetsIcon /> Register <PetsIcon /></Button>
+                    <div className='upload'>
+
+                {
+                    !uploadUrl ?
+                    <>
+                    <CloudinaryUploadWidget url={(u) => {setUploadUrl(u)}} />
+                    <em>Upload your profile image</em>
+                    </>
+                    :
+                    <img className='upload-img' src={uploadUrl} alt={uploadUrl} />
+                }
                 </div>
 
-            </form>
+                <div className="btn">
+                    <Button
+                        variant="contained"
+                        className='register-button'
+                        type='submit'
+                        onClick={handleSumbit}>
+
+                        <PetsIcon /> Register <PetsIcon />
+                    </Button>
+                </div>
+
+
+
+            </div>
 
             <Button className='login-button' href='/login'>Already have an account? Login Here</Button>
 

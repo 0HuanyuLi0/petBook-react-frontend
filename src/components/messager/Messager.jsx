@@ -17,11 +17,11 @@ function Message() {
     
 
 
-    useEffect(() => {
+    // useEffect(() => {
         
-        socket.emit('addUser', user.user._id)
-        // console.log('addUser', user.user._id);
-    }, [user?.user._id])
+    //     socket.emit('addUser', user.user._id)
+    //     // console.log('addUser', user.user._id);
+    // }, [user?.user._id])
 
     useEffect(() => {
         socket.on("getMessage", () => {
