@@ -12,7 +12,12 @@ import { useNavigate } from 'react-router-dom'
 import './navlinks.css'
 
 import axios from 'axios'
-const BASE_URL = 'http://localhost:3000/'
+let BASE_URL;
+if( process.env.NODE_ENV === 'development'){
+    BASE_URL = 'http://localhost:3000/';
+} else {
+    BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
+}
 
 
 function NavLinks() {

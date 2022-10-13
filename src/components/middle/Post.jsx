@@ -15,7 +15,12 @@ import { format } from 'timeago.js'
 import { Menu, MenuItem } from "@mui/material"
 
 import axios from 'axios'
-const BASE_URL = 'http://localhost:3000/'
+let BASE_URL;
+if( process.env.NODE_ENV === 'development'){
+    BASE_URL = 'http://localhost:3000/';
+} else {
+    BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
+}
 
 function Post({ post }) {
     const push = useNavigate()

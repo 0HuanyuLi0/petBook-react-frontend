@@ -5,13 +5,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios'
 import CloudinaryUploadWidget from '../CloudinaryUploadWidget';
 
-const BASE_URL = 'http://localhost:3000/'
+
 
 function ShareBox({ commentMode }) {
     // console.log('Mode:',commentMode);
 
     // let uploadUrl = null
-
+    let BASE_URL;
+    if( process.env.NODE_ENV === 'development'){
+        BASE_URL = 'http://localhost:3000/';
+    } else {
+        BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
+    }
 
     const user = JSON.parse(localStorage.getItem('user'));
     const token = "Bearer " + user.token

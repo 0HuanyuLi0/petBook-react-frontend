@@ -7,9 +7,15 @@ import PetsIcon from '@mui/icons-material/Pets';
 
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-const BASE_URL = 'http://localhost:3000/'
+
 
 function Register() {
+    let BASE_URL;
+if( process.env.NODE_ENV === 'development'){
+    BASE_URL = 'http://localhost:3000/';
+} else {
+    BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
+}
     const [result,setResult] = useState(null)
     const [email,setEmail] = useState(null)
     const [password,setPassword] = useState(null)

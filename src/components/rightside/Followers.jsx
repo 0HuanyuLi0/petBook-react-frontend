@@ -4,9 +4,15 @@ import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 
-const BASE_URL = 'http://localhost:3000/'
+
 
 function Followers() {
+    let BASE_URL;
+if( process.env.NODE_ENV === 'development'){
+    BASE_URL = 'http://localhost:3000/';
+} else {
+    BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
+}
     const friends = useSelector(state => state.friends)
     const dispatch = useDispatch();
 

@@ -8,9 +8,15 @@ import { useSelector, useDispatch } from 'react-redux';
 
 
 import axios from 'axios'
-const BASE_URL = 'http://localhost:3000/'
+
 
 function FriendsController({ userId }) {
+    let BASE_URL;
+if( process.env.NODE_ENV === 'development'){
+    BASE_URL = 'http://localhost:3000/';
+} else {
+    BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
+}
 
     const friends = useSelector(state => state.friends)
     const dispatch = useDispatch();
