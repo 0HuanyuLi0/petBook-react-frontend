@@ -24,7 +24,7 @@ function Message() {
 
     useEffect(() => {
         socket.emit('addUser', user.user._id)
-
+        console.log('addUser',user.user._id);
         return () => {
             // socket.off('connect')
             // socket.emit('goTodisconnect');
