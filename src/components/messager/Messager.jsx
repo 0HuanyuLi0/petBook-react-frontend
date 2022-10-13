@@ -17,8 +17,8 @@ function Message() {
     const token = "Bearer " + user?.token
     const [newMessage, setNewMessage] = useState('')
     const [messages, setMessages] = useState(null)
-
-    const socket = io(BASE_URL)
+    let socket = io(BASE_URL)
+    
 
     // useEffect(() => {
     //     console.log('======');
@@ -28,9 +28,11 @@ function Message() {
     // }, [])
 
     useEffect(() => {
+        
         socket.emit('addUser', user.user._id)
         console.log('addUser', user.user._id);
         return () => {
+            socket = null
             // socket.off('connect')
             // socket.emit('goTodisconnect');
         }
@@ -120,7 +122,7 @@ function Message() {
 
 
             <form className="inputs" onSubmit={handleSubmit}>
-                <textarea id='msg' placeholder="send something here..." rows={4} onChange={(e) => { setNewMessage(e.target.value) }} value={newMessage}></textarea>
+                <textarea id='msg' placeholder="send something here..." onChange={(e) => { setNewMessage(e.target.value) }} value={newMessage}></textarea>
                 <button type='submit'><SendIcon /></button>
             </form>
         </>

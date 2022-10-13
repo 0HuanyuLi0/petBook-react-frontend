@@ -3,16 +3,17 @@ import './following.css'
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-
+import { io } from 'socket.io-client'
 
 
 function Followers() {
     let BASE_URL;
-if( process.env.NODE_ENV === 'development'){
-    BASE_URL = 'http://localhost:3000/';
-} else {
-    BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
-}
+    if( process.env.NODE_ENV === 'development'){
+        BASE_URL = 'http://localhost:3000/';
+    } else {
+        BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
+    }
+    let socket = io(BASE_URL)
     const friends = useSelector(state => state.friends)
     const dispatch = useDispatch();
 
@@ -23,29 +24,34 @@ if( process.env.NODE_ENV === 'development'){
     const [following, setFollowing] = useState(null)
     const [followers, setFollowers] = useState(null)
 
+    const getFriends = async () => {
+        try {
+            const res = await axios.get(BASE_URL + `user/${user.user._id}/friends`, {
+                headers: {
+                    'Authorization': token
+                }
+            })
+
+            setFollowing(res.data.following)
+            setFollowers(res.data.followers)
+
+            dispatch({ type: 'friends/getFriends', payload:(res.data.following.length + res.data.followers.length)})
+
+        } catch (err) {
+            console.error('Error get friends', err);
+        }
+
+    }
 
     useEffect(() => {
-        const getFriends = async () => {
-            try {
-                const res = await axios.get(BASE_URL + `user/${user.user._id}/friends`, {
-                    headers: {
-                        'Authorization': token
-                    }
-                })
-
-                setFollowing(res.data.following)
-                setFollowers(res.data.followers)
-
-                dispatch({ type: 'friends/getFriends', payload:(res.data.following.length + res.data.followers.length)})
-
-            } catch (err) {
-                console.error('Error get friends', err);
-            }
-
-        }
         getFriends()
     }, [friends])
 
+    useEffect(()=>{
+        socket.on("getFriends",()=>{
+            getFriends()
+        })
+    },[])
 
 
 

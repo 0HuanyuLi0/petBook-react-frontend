@@ -5,7 +5,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { pink } from '@mui/material/colors';
 import './friendsController.css'
 import { useSelector, useDispatch } from 'react-redux';
-
+import { io } from 'socket.io-client'
 
 import axios from 'axios'
 
@@ -17,7 +17,7 @@ if( process.env.NODE_ENV === 'development'){
 } else {
     BASE_URL = 'https://petbook-server-huanyuli.herokuapp.com/';
 }
-
+let socket = io(BASE_URL)
     const friends = useSelector(state => state.friends)
     const dispatch = useDispatch();
 
@@ -31,8 +31,8 @@ if( process.env.NODE_ENV === 'development'){
                 })
 
             dispatch({ type: 'friends/addNewFriends'})
-
-            console.log('add friend:', res.data);
+socket.emit('addFriends','addFriends')
+            // console.log('add friend:', res.data);
 
         } catch (err) {
             console.error(err);
@@ -48,8 +48,8 @@ if( process.env.NODE_ENV === 'development'){
                     currentUserId : user.user._id
                 })
                 dispatch({ type: 'friends/deleteFriends'})
-            console.log('remove friend:', res.data);
-
+            // console.log('remove friend:', res.data);
+            socket.emit('addFriends','addFriends')
         } catch (err) {
             console.error(err);
         }
