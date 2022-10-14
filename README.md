@@ -1,3 +1,67 @@
+# PetBook Social App
+
+## Description:
+This PetBook app is for your pet(s) 🐶🐱🐕🐰🐈🐹🐇🐩🦮❤️💕
+You can share your pet(s) stories here and socail with other pet(s) owners
+Find, Join, or Create your pet(s) group
+
+[Demo App](https://0huanyuli0.github.io/petBook-react-frontend/) 
+*Demo account: one@one.com | password: test*  
+
+[Backend Code](https://github.com/0HuanyuLi0/petBook-nodejs-backend)
+[Frontend Code](https://github.com/0HuanyuLi0/petBook-react-frontend)
+## Features:
+
+1. Follow / unFollow users
+2. Chat with other user(s)
+3. Browersing all users' posts
+4. Post your pet(s) stories with photo and text (more functions will come soon)
+5. Search user and post content
+6. Showing all online users
+7. Like / dislike posts
+8. Comment on post
+9. Showing all posts by specific user
+10. Create and Delete account     
+    
+and more...
+
+## Techinques
+
+#### Frontend:
+React.js | Hooks | Redux | Socket.io-client | Cloudinary Upload Widget | Material UI | Axios | Timeago.js
+
+#### Backend:
+Node.js | Express.js | Mongoose | Socket.io | BCrypt 
+
+#### Database:
+MongoDB
+
+## Challenges During Project
+1. Associations in noSQL (solved)
+2. Socket.io connect to server multiple times (solved)
+3. React Router v6.4.1 new syntex doesn't match GH-pages ? -> routes array syntax
+4. Material UI is not intuitive to use -> such as Modal component must be used with Box component, MenuItem component in a loop the params is always the value of first item in the loop, 
+
+
+## TODO Lists:
+1. Upload and display short videos
+2. Get notifications for new comments, friends, messages
+3. Dark Mode
+4. UI for mobile phone users
+5. Tag your posts and sort them by tags
+6. Group by pet type
+7. Google | Facebook account directly login
+8. Share | Resend posts
+9. more ...
+
+## Bugs:
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
