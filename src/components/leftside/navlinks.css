@@ -9,10 +9,13 @@
     text-transform: none;
     text-align: right;
     margin-bottom: 5px;
+    border-radius: 10px;
 }
 
 .nav-links button:hover{
-    background-color: #ffc226 !important
+    background-color: #ffc226 !important;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
 }
 
 

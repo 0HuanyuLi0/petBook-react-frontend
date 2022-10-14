@@ -133,7 +133,7 @@ function Register() {
 
             </div>
 
-            <Button className='login-button' href='/login'>Already have an account? Login Here</Button>
+            <Button className='login-button' onClick={()=>{push('/login')}}>Already have an account? Login Here</Button>
 
         </div>
     )

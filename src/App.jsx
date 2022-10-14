@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 // import {
 //   createBrowserRouter,
 //   RouterProvider,
@@ -10,14 +10,13 @@ import React from 'react'
 //   HashRouter,
 // } from "react-router-dom";
 
-import {HashRouter as Router, Link, Route, Routes} from 'react-router-dom';
+import { HashRouter as Router, Link, Route, Routes, useNavigate } from 'react-router-dom';
 
 import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 // import Profile from './components/profile/Profile';
 
-const user = JSON.parse(localStorage.getItem('user'));
 
 // const router = createBrowserRouter([
 //   {
@@ -44,21 +43,25 @@ const user = JSON.parse(localStorage.getItem('user'));
 
 
 function App() {
-  return (
-    // <RouterProvider router={router} />
-    <>
+  const user = JSON.parse(localStorage.getItem('user'));
+  // const push = useNavigate()
+
+return (
+  // <RouterProvider router={router} />
+  <>
     <Router>
+
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/home/:id" element={<Home />} />
         <Route path="/profile/:id" element={<Home />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/messager/:id" element={<Home />} />
-        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
-    </>
-  )
+  </>
+)
 }
 
 export default App

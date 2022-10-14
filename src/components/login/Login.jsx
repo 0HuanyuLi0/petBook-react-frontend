@@ -94,7 +94,7 @@ function Login() {
             </form>
 
            
-            <Button className='register-button' href='/register'>No Account? Register Now</Button>
+            <Button className='register-button' onClick={()=>{push('/register')}}>No Account? Register Now</Button>
 
 
             <Message />

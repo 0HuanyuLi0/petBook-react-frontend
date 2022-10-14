@@ -49,9 +49,9 @@ function NavLinks() {
                     <span>Home</span> 
                 </Button>
 
-                <Button size="large" startIcon={<NotificationsIcon />}  style={{justifyContent: "flex-start"}}>
+                {/* <Button size="large" startIcon={<NotificationsIcon />}  style={{justifyContent: "flex-start"}}>
                     Notification
-                </Button>
+                </Button> */}
 
                 <Button size="large" startIcon={<FeedIcon />} onClick={()=>{push(profilePath)}} style={{justifyContent: "flex-start"}}>
                     Feeds
