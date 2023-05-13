@@ -89,7 +89,8 @@ function SearchBar() {
         </form>
       </div>
 
-      {results?.length > 0 && <Modal
+      {results?.length > 0 && 
+      <Modal
         open={open}
         onClose={handleClose}
       >

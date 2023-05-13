@@ -52,7 +52,9 @@ MongoDB
 6. Group by pet type
 7. Google | Facebook account directly login
 8. Share | Resend posts
-9. more ...
+9. Rich text input (Draft.js)
+10. Chat in different room
+11. more ...
 
 ## Bugs:
 
